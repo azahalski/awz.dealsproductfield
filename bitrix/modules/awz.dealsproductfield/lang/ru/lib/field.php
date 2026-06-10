@@ -1,0 +1,15 @@
+<?
+$MESS["AWZ_DEALSPRODUCTFIELD_UF_DESCRIPTION"] = "Товары сделок";
+$MESS["AWZ_DEALSPRODUCTFIELD_CRM_NOT_INSTALLED"] = "Модуль CRM не установлен";
+$MESS["AWZ_DEALSPRODUCTFIELD_INVALID_JSON"] = "Некорректный формат данных";
+$MESS["AWZ_DEALSPRODUCTFIELD_SELECT_DEALS"] = "Выберите сделки";
+$MESS["AWZ_DEALSPRODUCTFIELD_ADD_DEALS"] = "Добавить сделки";
+$MESS["AWZ_DEALSPRODUCTFIELD_SELECTED_PRODUCTS"] = "Выбрано товаров";
+$MESS["AWZ_DEALSPRODUCTFIELD_NO_DEALS"] = "Нет выбранных сделок";
+$MESS["AWZ_DEALSPRODUCTFIELD_NO_PRODUCTS"] = "Нет товаров в сделке";
+$MESS["AWZ_DEALSPRODUCTFIELD_TOTAL_PRODUCTS"] = "Всего товаров";
+$MESS["AWZ_DEALSPRODUCTFIELD_LOADING"] = "Загрузка";
+$MESS["AWZ_DEALSPRODUCTFIELD_LOAD_ERROR"] = "Ошибка загрузки данных";
+$MESS["AWZ_DEALSPRODUCTFIELD_SELECTOR_NOT_AVAILABLE"] = "Селектор сущностей недоступен. Убедитесь, что загружен модуль CRM.";
+$MESS["AWZ_DEALSPRODUCTFIELD_UNNAMED_PRODUCT"] = "Без названия";
+$MESS["AWZ_DEALSPRODUCTFIELD_SELECT_PRODUCTS"] = "Выберите товары:";

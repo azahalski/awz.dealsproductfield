@@ -1,0 +1,5 @@
+<?
+$MESS["AWZ_DEALSPRODUCTFIELD_CRM_NOT_INSTALLED"] = "Модуль CRM не установлен";
+$MESS["AWZ_DEALSPRODUCTFIELD_INVALID_DEAL_ID"] = "Некорректный ID сделки";
+$MESS["AWZ_DEALSPRODUCTFIELD_NO_ACCESS"] = "Нет прав доступа";
+$MESS["AWZ_DEALSPRODUCTFIELD_DEAL_NOT_FOUND"] = "Сделка не найдена";
