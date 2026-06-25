@@ -59,6 +59,7 @@ class Field extends StringType
         if (!Loader::includeModule('crm')) {
             return '<div class="ui-alert ui-alert-danger">' . Loc::getMessage('AWZ_DEALSPRODUCTFIELD_CRM_NOT_INSTALLED') . '</div>';
         }
+        \CJSCore::Init(['ui.entity-selector', 'ui.dialogs', 'awz_deals_product_field']);
 
         $fieldName = $userField['FIELD_NAME'] ?? '';
         $value = $userField['VALUE'] ?? '';
@@ -273,7 +274,7 @@ class Field extends StringType
         }elseif(is_array($value)){
             return end($value);
         }
-        return $value;
+        return $value ?? "";
     }
 
     public static function getDbColumnType(): string

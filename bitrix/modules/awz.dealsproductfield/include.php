@@ -7,4 +7,4 @@
     'css' => '/bitrix/css/awz.dealsproductfield/styles.css',
 ]);
 
-\CJSCore::Init(['ui.entity-selector', 'ui.dialogs', 'awz_deals_product_field']);
+//\CJSCore::Init(['ui.entity-selector', 'ui.dialogs', 'awz_deals_product_field']);

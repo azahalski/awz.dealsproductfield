@@ -119,7 +119,8 @@ class awz_dealsproductfield extends CModule {
         $eventManager = EventManager::getInstance();
         $eventManager->registerEventHandlerCompatible(
             'main', 'OnUserTypeBuildList', $this->MODULE_ID,
-            '\Awz\Dealsproductfield\Field', 'GetUserTypeDescription'
+            '\Awz\Dealsproductfield\Field', 'GetUserTypeDescription',
+            600
         );
         return true;
     }

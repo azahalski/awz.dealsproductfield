@@ -177,6 +177,17 @@
                         instance.renderDeals();
                     }
 
+                    // Если все сделки удалены — обнуляем значение поля выбора
+                    if (Object.keys(instance.dealsData).length === 0) {
+                        instance.valueInput.value = '';
+                        instance.valueInput.dataset.dealsData = '[]';
+                        // Обнуляем значения hidden-инпутов, но не удаляем их
+                        var existingInputs = document.querySelectorAll('input.awz-deals-product-multiple-value');
+                        existingInputs.forEach(function(input) {
+                            input.value = '';
+                        });
+                    }
+
                     const event_1 = new Event('change', { bubbles: true });
                     document.querySelector('input[name="'+field_name+'-main"]').dispatchEvent(event_1);
                 }
@@ -361,22 +372,47 @@
             input.remove();
         });
 
-        // Создаем отдельные инпуты для каждой сделки
-        const dealIds = Object.keys(this.dealsData);
-        dealIds.forEach(function(dealId, index) {
-            const dealData = this.dealsData[dealId];
-            const dealJson = JSON.stringify({
-                [dealId]: dealData
-            });
+        // Также удаляем пустой hidden input (если был добавлен ранее)
+        const emptyInput = this.container.querySelector('input.awz-deals-product-empty-value[name="' + this.escapeAttribute(this.fieldName) + '"]');
+        if (emptyInput) {
+            emptyInput.remove();
+        }
 
-            // Создаем hidden input
+        // Проверяем, есть ли выбранные товары (отмеченные чекбоксы)
+        const dealIds = Object.keys(this.dealsData);
+        let hasSelectedProducts = false;
+        dealIds.forEach(function(dealId) {
+            const deal = this.dealsData[dealId];
+            if (deal.selectedProducts && deal.selectedProducts.length > 0) {
+                hasSelectedProducts = true;
+            }
+        }.bind(this));
+
+        // Создаем отдельные инпуты для каждой сделки
+        if (!hasSelectedProducts) {
+            // Если не выбрано ни одного товара, добавляем hidden input с пустым значением
             const input = document.createElement('input');
             input.type = 'hidden';
             input.name = this.fieldName;
-            input.value = dealJson;
-            input.className = 'awz-deals-product-multiple-value';
+            input.value = '';
+            input.className = 'awz-deals-product-empty-value';
             this.container.querySelector('.awz-deals-selector').appendChild(input);
-        }.bind(this));
+        } else {
+            dealIds.forEach(function(dealId, index) {
+                const dealData = this.dealsData[dealId];
+                const dealJson = JSON.stringify({
+                    [dealId]: dealData
+                });
+
+                // Создаем hidden input
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = this.fieldName;
+                input.value = dealJson;
+                input.className = 'awz-deals-product-multiple-value';
+                this.container.querySelector('.awz-deals-selector').appendChild(input);
+            }.bind(this));
+        }
 
         // Основной инпут всегда пустой для множественного поля
         this.valueInput.value = '';
@@ -389,24 +425,49 @@
             input.value = '';
             input.remove();
         });
-        
-        // Создаем отдельные инпуты для каждой сделки
+
+        // Также удаляем пустой hidden input (если был добавлен ранее)
+        const emptyInput = this.container.querySelector('input.awz-deals-product-empty-value[name="' + this.escapeAttribute(this.fieldName) + '"]');
+        if (emptyInput) {
+            emptyInput.remove();
+        }
+
+        // Проверяем, есть ли выбранные товары (отмеченные чекбоксы)
         const dealIds = Object.keys(this.dealsData);
-        dealIds.forEach(function(dealId, index) {
-            const dealData = this.dealsData[dealId];
-            const dealJson = JSON.stringify({
-                [dealId]: dealData
-            });
-            
-            // Создаем hidden input
+        let hasSelectedProducts = false;
+        dealIds.forEach(function(dealId) {
+            const deal = this.dealsData[dealId];
+            if (deal.selectedProducts && deal.selectedProducts.length > 0) {
+                hasSelectedProducts = true;
+            }
+        }.bind(this));
+
+        // Создаем отдельные инпуты для каждой сделки
+        if (!hasSelectedProducts) {
+            // Если не выбрано ни одного товара, добавляем hidden input с пустым значением
             const input = document.createElement('input');
             input.type = 'hidden';
-            input.name = this.fieldName + '[' + index + ']';
-            input.value = dealJson;
-            input.className = 'awz-deals-product-multiple-value';
+            input.name = this.fieldName;
+            input.value = '';
+            input.className = 'awz-deals-product-empty-value';
             this.container.querySelector('.awz-deals-selector').appendChild(input);
-        }.bind(this));
-        
+        } else {
+            dealIds.forEach(function(dealId, index) {
+                const dealData = this.dealsData[dealId];
+                const dealJson = JSON.stringify({
+                    [dealId]: dealData
+                });
+
+                // Создаем hidden input
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = this.fieldName + '[' + index + ']';
+                input.value = dealJson;
+                input.className = 'awz-deals-product-multiple-value';
+                this.container.querySelector('.awz-deals-selector').appendChild(input);
+            }.bind(this));
+        }
+
         // Основной инпут всегда пустой для множественного поля
         this.valueInput.value = '';
     };
