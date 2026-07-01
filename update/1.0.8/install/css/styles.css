@@ -1,0 +1,169 @@
+.awz-deals-product-field-container {
+    margin-bottom: 10px;
+    min-width: 300px;
+}
+
+.awz-deals-selector-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.awz-deals-selector-header label {
+    display: block;
+    margin-bottom: 0;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.awz-deals-selected-list {
+    min-height: 40px;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    padding: 4px;
+    margin-bottom: 4px;
+    background: #fff;
+    overflow-y: hidden;
+    margin-top: 2px;
+}
+
+.awz-deal-item {
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    background: #f9f9f9;
+}
+
+.awz-deal-item:last-child {
+    margin-bottom: 0;
+}
+
+.awz-deal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.awz-deal-title {
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+}
+
+.awz-deal-title-link {
+    font-weight: bold;
+    font-size: 14px;
+    color: #2066b0;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.awz-deal-title-link:hover {
+    color: #2a7fb5;
+    text-decoration: underline;
+}
+
+.awz-deal-products-info {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 2px;
+}
+
+.awz-product-selector-wrapper {
+    margin-top: 2px;
+}
+
+.awz-product-selector-wrapper label {
+    display: block;
+    font-size: 11px;
+    margin-bottom: 2px;
+    color: #666;
+}
+
+.awz-products-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 2px;
+    color: #333;
+}
+
+.awz-products-checkbox-list {
+    overflow-y: hidden;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 2px;
+    background: #fff;
+}
+
+.awz-product-checkbox-item {
+    display: flex;
+    align-items: center;
+    padding: 2px 4px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.15s ease;
+}
+
+.awz-product-checkbox-item:last-child {
+    border-bottom: none;
+}
+
+.awz-product-checkbox-item:hover {
+    background-color: #f5f5f5;
+}
+
+.awz-product-checkbox {
+    margin-right: 4px;
+    cursor: pointer;
+}
+
+.awz-product-checkbox-label {
+    flex: 1;
+    font-size: 11px;
+    color: #333;
+    cursor: pointer;
+    user-select: none;
+}
+
+.awz-product-checkbox-label:hover {
+    color: #000;
+}
+
+.awz-product-select {
+    width: 100%;
+    min-height: 100px;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    padding: 5px;
+    background: #fff;
+    font-size: 13px;
+}
+
+.awz-deal-actions {
+    margin-left: 10px;
+}
+
+.awz-deal-actions button {
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+.awz-products-loading {
+    text-align: center;
+    padding: 10px;
+    color: #999;
+    font-size: 12px;
+}
+
+.awz-empty-deals {
+    text-align: center;
+    padding: 20px;
+    color: #999;
+    font-style: italic;
+}
