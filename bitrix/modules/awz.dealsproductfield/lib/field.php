@@ -208,31 +208,73 @@ class Field extends StringType
         }
 
         if (empty($dealsData)) {
-            //return '';
+            return '';
         }
 
         ob_start();
-        //print_r($dealsData);
-        //print_r($userField);
-        //print_r($additionalParameters);
         echo '<div class="awz-deals-product-view" style="min-height:20px;">';
 
         foreach ($dealsData as $dealId => $dealData) {
             $dealTitle = $dealData['title'] ?? 'Сделка #' . $dealId;
-            echo '<div style="margin-bottom: 10px;">';
-            echo '<strong>' . htmlspecialcharsbx($dealTitle) . '</strong><br>';
+            echo '<div style="margin-bottom: 15px;">';
+            echo '<strong style="font-size: 14px; color: #2066b0;">' . htmlspecialcharsbx($dealTitle) . '</strong>';
 
-            if (!empty($dealData['products'])) {
-                echo '<small>';
-                $productNames = [];
+            // Получаем выбранные товары
+            // Сначала проверяем новую структуру selectedProductsData (с полными данными о товарах)
+            $selectedProducts = [];
+            if (!empty($dealData['selectedProductsData']) && is_array($dealData['selectedProductsData'])) {
+                // Новая структура - используем сохраненные данные о товарах
+                $selectedProducts = $dealData['selectedProductsData'];
+            } elseif (!empty($dealData['products']) && !empty($dealData['selectedProducts'])) {
+                // Старая структура - получаем данные о товарах из products по ID из selectedProducts
                 foreach ($dealData['products'] as $product) {
-                    if (isset($dealData['selectedProducts']) &&
-                        in_array($product['id'], $dealData['selectedProducts'])) {
-                        $productNames[] = htmlspecialcharsbx($product['name']);
+                    if (in_array($product['id'], $dealData['selectedProducts'])) {
+                        $selectedProducts[] = $product;
                     }
                 }
-                echo implode(', ', $productNames);
-                echo '</small>';
+            }
+
+            if (!empty($selectedProducts)) {
+                echo '<table class="awz-view-products-table" style="width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12px;">';
+                //echo '<thead>';
+                //echo '<tr style="background-color: #f5f5f5; border-bottom: 2px solid #e0e0e0;">';
+                //echo '<th style="padding: 6px 8px; text-align: left; font-weight: 600; color: #333;">Товар</th>';
+                //echo '<th style="padding: 6px 8px; text-align: right; font-weight: 600; color: #333;">Цена</th>';
+                //echo '<th style="padding: 6px 8px; text-align: center; font-weight: 600; color: #333;">Кол-во</th>';
+                //echo '<th style="padding: 6px 8px; text-align: right; font-weight: 600; color: #333;">Сумма</th>';
+                //echo '</tr>';
+                //echo '</thead>';
+                echo '<tbody>';
+                
+                $totalSum = 0;
+                foreach ($selectedProducts as $product) {
+                    $productName = $product['name'] ?? 'Без названия';
+                    $price = isset($product['price']) ? (float)$product['price'] : 0;
+                    $quantity = isset($product['quantity']) ? (float)$product['quantity'] : 0;
+                    $measureName = $product['measureName'] ?? '';
+                    $sum = $price * $quantity;
+                    $totalSum += $sum;
+                    
+                    echo '<tr style="border-bottom: 1px solid #e0e0e0;">';
+                    echo '<td style="padding: 6px 8px; color: #333;">' . htmlspecialcharsbx($productName) . '<br>';
+                    echo '' . number_format($price, 2, ',', ' ') . ' Х ';
+                    echo '' .
+                         ($quantity > 0 ? number_format($quantity, 2, ',', ' ') . ($measureName ? ' ' . htmlspecialcharsbx($measureName) : '') : '—') . 
+                         '</td>';
+                    echo '<td style="padding: 6px 8px; text-align: right; color: #333; font-weight: 500;white-space: nowrap;">' . number_format($sum, 2, ',', ' ') . '</td>';
+                    echo '</tr>';
+                }
+                
+                // Итого
+                echo '<tr style="background-color: #FFFEEF; border-top: 1px solid #e0e0e0; font-weight: 600;">';
+                echo '<td style="padding: 6px 8px; color: #333;">Итого:</td>';
+                echo '<td style="padding: 6px 8px; text-align: right; color: #2066b0;white-space: nowrap;">' . number_format($totalSum, 2, ',', ' ') . '</td>';
+                echo '</tr>';
+                
+                echo '</tbody>';
+                echo '</table>';
+            } else {
+                echo '<div style="color: #999; font-style: italic; font-size: 12px; margin-top: 5px;">Товары не выбраны</div>';
             }
 
             echo '</div>';

@@ -45,8 +45,49 @@
     DealsProductField.prototype.init = function() {
         // Если ничего не выбрано и есть текущая сделка, добавляем её по умолчанию
         this.initDefaultDeal();
+        // Мигрируем старую структуру данных в новую (добавляем selectedProductsData)
+        this.migrateDataStructure();
         this.renderDeals();
         this.initTagSelector();
+    };
+
+    DealsProductField.prototype.migrateDataStructure = function() {
+        // Мигрируем старую структуру (только selectedProducts с ID) в новую (selectedProductsData с полными данными)
+        const dealIds = Object.keys(this.dealsData);
+        let migrated = false;
+        
+        dealIds.forEach(function(dealId) {
+            const deal = this.dealsData[dealId];
+            // Если есть selectedProducts, но нет selectedProductsData
+            if (deal && Array.isArray(deal.selectedProducts) && deal.selectedProducts.length > 0 && 
+                (!deal.selectedProductsData || !Array.isArray(deal.selectedProductsData) || deal.selectedProductsData.length === 0)) {
+                // Если есть products, формируем selectedProductsData из них
+                if (Array.isArray(deal.products) && deal.products.length > 0) {
+                    const selectedProductsData = [];
+                    deal.selectedProducts.forEach(function(productId) {
+                        const product = deal.products.find(function(p) {
+                            return parseInt(p.id) === parseInt(productId);
+                        });
+                        if (product) {
+                            selectedProductsData.push({
+                                id: product.id,
+                                name: product.name || '',
+                                price: product.price || 0,
+                                quantity: product.quantity || 0,
+                                measureName: product.measureName || '',
+                                productId: product.productId || 0
+                            });
+                        }
+                    });
+                    this.dealsData[dealId].selectedProductsData = selectedProductsData;
+                    migrated = true;
+                }
+            }
+        }.bind(this));
+        
+        if (migrated) {
+            this.saveDealsData();
+        }
     };
 
     DealsProductField.prototype.initDefaultDeal = function() {
@@ -536,22 +577,42 @@
             const dealId = checkbox.dataset.dealId;
             const instance = getFieldInstance(fieldName);
             if (instance && dealId) {
-                const selected = [];
+                const selectedIds = [];
+                const selectedProductsData = [];
                 const wrapper = document.getElementById('product-wrapper-' + instance.escapeId(fieldName) + '-' + dealId);
                 if (wrapper) {
                     wrapper.querySelectorAll('.awz-product-checkbox:checked').forEach(function(chk) {
-                        selected.push(parseInt(chk.value, 10));
+                        const productId = parseInt(chk.value, 10);
+                        selectedIds.push(productId);
+                        // Находим полные данные о товаре
+                        const deal = instance.dealsData[dealId];
+                        if (deal && deal.products) {
+                            const productData = deal.products.find(function(p) {
+                                return parseInt(p.id) === productId;
+                            });
+                            if (productData) {
+                                selectedProductsData.push({
+                                    id: productData.id,
+                                    name: productData.name || '',
+                                    price: productData.price || 0,
+                                    quantity: productData.quantity || 0,
+                                    measureName: productData.measureName || '',
+                                    productId: productData.productId || 0
+                                });
+                            }
+                        }
                     });
                 }
-                // Обновляем только информацию о количестве выбранных товаров
+                // Обновляем информацию о выбранных товарах с полными данными
                 if (instance.dealsData[dealId]) {
-                    instance.dealsData[dealId].selectedProducts = selected;
+                    instance.dealsData[dealId].selectedProducts = selectedIds;
+                    instance.dealsData[dealId].selectedProductsData = selectedProductsData;
                     instance.saveDealsData();
                     // Обновляем информацию о выбранных товарах без перерендеринга всего списка
                     const dealInfoEl = wrapper.previousElementSibling;
                     if (dealInfoEl && dealInfoEl.classList.contains('awz-deal-products-info')) {
                         const deal = instance.dealsData[dealId];
-                        const selectedCount = selected.length;
+                        const selectedCount = selectedIds.length;
                         const totalCount = deal.products ? deal.products.length : 0;
                         dealInfoEl.innerHTML = totalCount > 0 ? instance.escapeHtml(instance.messages.totalProducts) + ': ' + totalCount + (selectedCount > 0 ? ' | ' + instance.escapeHtml(instance.messages.selectedProducts) + ': ' + selectedCount : '') : instance.escapeHtml(instance.messages.noProducts);
                     }
