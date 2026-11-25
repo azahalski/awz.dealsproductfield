@@ -1,20 +1,48 @@
-[size=22pt][b]Краткое описание[/b][/size]
+[center][size=18pt][b]Пользовательское поле: Товары сделок[/b][/size]
+[IMG WIDTH=225 HEIGHT=9]https://zahalski.dev/upload/awz.load.ai/lv1iyow5dj.png[/IMG][/center]
+[center]
+[TABLE][TR][TH][IMG WIDTH=10 HEIGHT=10]https://zahalski.dev/upload/awz.load.ai/4zhdkguvu3.png[/IMG][IMG WIDTH=150 HEIGHT=10]https://zahalski.dev/upload/awz.load.ai/5bgfxic7b1.png[/IMG][/TH][TH][b]Пользовательское поле для CRM: выбираете сделки и конкретные товары из их товарных наборов прямо в карточке сделки.[/b][/TH][TH][IMG WIDTH=10 HEIGHT=10]https://zahalski.dev/upload/awz.load.ai/4zhdkguvu3.png[/IMG][IMG WIDTH=150 HEIGHT=10]https://zahalski.dev/upload/awz.load.ai/5bgfxic7b1.png[/IMG][/TH][/TR][TR][TH][IMG WIDTH=10 HEIGHT=10]https://zahalski.dev/upload/awz.load.ai/4zhdkguvu3.png[/IMG][/TH][/TR][TR][TH][IMG WIDTH=10 HEIGHT=10]https://zahalski.dev/upload/awz.load.ai/4zhdkguvu3.png[/IMG][IMG WIDTH=150 HEIGHT=10]https://zahalski.dev/upload/awz.load.ai/5bgfxic7b1.png[/IMG][/TH][TH][color=#8b93b3]Данные хранятся в JSON, доступ к товарам проверяется правами на сделки, поле доступно и в бизнес-процессах.[/color][/TH][TH][IMG WIDTH=10 HEIGHT=10]https://zahalski.dev/upload/awz.load.ai/4zhdkguvu3.png[/IMG][IMG WIDTH=150 HEIGHT=10]https://zahalski.dev/upload/awz.load.ai/5bgfxic7b1.png[/IMG][/TH][/TR][/TABLE][/center]
+[center]
+[TABLE][TR][TH][center][IMG WIDTH=72 HEIGHT=72]https://zahalski.dev/upload/awz.load.ai/c1cbhlxr0y.png[/IMG][/center]
 
-Модуль [b]awz.dealsproductfield[/b] добавляет новый тип пользовательского поля для Bitrix CRM, позволяющий выбирать сделки и конкретные товары из товарного набора этих сделок.
+[center][b]Выбор сделок[/b][/center][color=#8b93b3]стандартный селектор сущностей: найдите сделку и добавьте её в поле.[/color][/TH][TH][center][IMG WIDTH=10 HEIGHT=20]https://zahalski.dev/upload/awz.load.ai/4zhdkguvu3.png[/IMG][/center][/TH][TH][center][IMG WIDTH=72 HEIGHT=72]https://zahalski.dev/upload/awz.load.ai/mcy04a8qah.png[/IMG][/center]
 
-[size=22pt][b]Подробное описание[/b][/size]
+[center][b]Товары с ценами[/b][/center][color=#8b93b3]список товаров выбранной сделки с количеством и ценами — прямо в карточке.[/color][/TH][TH][center][IMG WIDTH=10 HEIGHT=20]https://zahalski.dev/upload/awz.load.ai/4zhdkguvu3.png[/IMG][/center][/TH][TH][center][IMG WIDTH=72 HEIGHT=72]https://zahalski.dev/upload/awz.load.ai/no96v25rrf.png[/IMG][/center]
 
-Модуль расширяет функциональность пользовательских полей Bitrix, добавляя тип поля [b]awz_deals_product[/b]. Это поле предназначено для работы в CRM-системе и позволяет:
+[center][b]Множественные поля[/b][/center][color=#8b93b3]добавьте несколько полей «Товары сделок» — по одной сделке в каждом.[/color][/TH][/TR][/TABLE]
+[/center]
 
-[list][*][b]Выбирать сделки[/b] из CRM с использованием стандартного селектора сущностей (EntitySelector)
-[*][b]Выбирать товары[/b] из товарного набора каждой выбранной сделки
-[*][b]Просматривать детали[/b] сделки и список её товаров с ценами и количеством
-[*][b]Работать с множественными полями[/b] — можно добавить несколько разных сделок с выбранными товарами[/list]
+[center][IMG WIDTH=800 HEIGHT=447]https://zahalski.dev/upload/awz.load.ai/cvc0bqgr5s.png[/IMG][/center]
 
-[size=22pt][b]Основные возможности[/b][/size]
 
-[list][*][b]Интерфейс выбора[/b]: Использует стандартный UI EntitySelector Bitrix для удобного выбора сделок
-[*][b]Автоматическое определение контекста[/b]: При редактировании поля в карточке сделки, эта сделка автоматически добавляется в список выбранных
-[*][b]Хранение данных[/b]: Данные хранятся в формате JSON с информацией о сделках и выбранных товарах
-[*][b]API контроллер[/b]: Предоставляет методы для получения списка товаров сделки, информации о сделке и поиска сделок
-[*][b]Права доступа[/b]: Проверяет права чтения сделок перед отображением данных[/list]
+[center][size=18pt][b]Как работает[/b][/size]
+[IMG WIDTH=225 HEIGHT=9]https://zahalski.dev/upload/awz.load.ai/lv1iyow5dj.png[/IMG][/center]
+[center]
+[TABLE]
+[TR][TD][IMG WIDTH=44 HEIGHT=44]https://zahalski.dev/upload/awz.load.ai/glmyclx6q6.png[/IMG][/TD][TD][IMG WIDTH=10 HEIGHT=10]https://zahalski.dev/upload/awz.load.ai/4zhdkguvu3.png[/IMG][/TD][TD]Поле добавляется в CRM: Настройки → Пользовательские поля, тип «Товары сделки» (awz_deals_product), объект CRM_DEAL.[/TD][/TR]
+[TR][TD][IMG WIDTH=44 HEIGHT=44]https://zahalski.dev/upload/awz.load.ai/oc1df1fkky.png[/IMG][/TD][TD][IMG WIDTH=10 HEIGHT=10]https://zahalski.dev/upload/awz.load.ai/4zhdkguvu3.png[/IMG][/TD][TD]При редактировании в карточке сделки текущая сделка добавляется автоматически, остальные выбираются через селектор.[/TD][/TR]
+[TR][TD][IMG WIDTH=44 HEIGHT=44]https://zahalski.dev/upload/awz.load.ai/vl63335huk.png[/IMG][/TD][TD][IMG WIDTH=10 HEIGHT=10]https://zahalski.dev/upload/awz.load.ai/4zhdkguvu3.png[/IMG][/TD][TD]Товары каждой сделки подгружаются AJAX-контроллером awz:dealsproductfield.api.field: getDealProducts, getDealInfo, getDeals.[/TD][/TR]
+[TR][TD][IMG WIDTH=44 HEIGHT=44]https://zahalski.dev/upload/awz.load.ai/of72mv1115.png[/IMG][/TD][TD][IMG WIDTH=10 HEIGHT=10]https://zahalski.dev/upload/awz.load.ai/4zhdkguvu3.png[/IMG][/TD][TD]В бизнес-процессах поле доступно как тип «Выбор товаров сделок»: значение приводится к строке и выводится в лог.[/TD][/TR]
+[/TABLE]
+[/center]
+
+[center][IMG WIDTH=800 HEIGHT=447]https://zahalski.dev/upload/awz.load.ai/w0g3cx6akp.png[/IMG][/center]
+
+
+[center][size=18pt][b]Настройки[/b][/size]
+[IMG WIDTH=225 HEIGHT=9]https://zahalski.dev/upload/awz.load.ai/lv1iyow5dj.png[/IMG][/center]
+[center]
+[TABLE]
+[TR][TD][IMG WIDTH=135 HEIGHT=10]https://zahalski.dev/upload/awz.load.ai/4zhdkguvu3.png[/IMG][/TD][TD][IMG WIDTH=10 HEIGHT=10]https://zahalski.dev/upload/awz.load.ai/4zhdkguvu3.png[/IMG][/TD][TD][/TD][/TR]
+[TR][TD][center][b]Тип поля[/b][/center][/TD][TD][IMG WIDTH=10 HEIGHT=10]https://zahalski.dev/upload/awz.load.ai/4zhdkguvu3.png[/IMG][/TD][TD]Товары сделки (awz_deals_product), объект CRM_DEAL, множественное — задаётся при создании поля.[/TD][/TR]
+[TR][TD][center][b]Текущая сделка[/b][/center][/TD][TD][IMG WIDTH=10 HEIGHT=10]https://zahalski.dev/upload/awz.load.ai/4zhdkguvu3.png[/IMG][/TD][TD]в карточке сделки она добавляется автоматически, остальные выбираются через селектор сущностей.[/TD][/TR]
+[TR][TD][center][b]Права доступа[/b][/center][/TD][TD][IMG WIDTH=10 HEIGHT=10]https://zahalski.dev/upload/awz.load.ai/4zhdkguvu3.png[/IMG][/TD][TD]перед отображением товаров проверяются права чтения сделки — пользователь видит только разрешённое.[/TD][/TR]
+[TR][TD][center][b]Бизнес-процессы[/b][/center][/TD][TD][IMG WIDTH=10 HEIGHT=10]https://zahalski.dev/upload/awz.load.ai/4zhdkguvu3.png[/IMG][/TD][TD]поле участвует в параметрах БП: значение приводится к строке и выводится в лог.[/TD][/TR]
+[/TABLE]
+[/center]
+
+[center][color=#8b93b3]Поле добавляется: CRM → Настройки → Пользовательские поля → Добавить поле (тип «Товары сделки»)[/color][/center]
+
+
+Модуль закрывает вопрос «как привязать товары одной сделки к другой»: поле хранит выбор сделок и товаров, доступ проверяется правами.
+Установка штатная: после установки тип поля «Товары сделки» появится в пользовательских полях CRM.
